@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import assets, { facilityIcons, roomsDummyData } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
 import StarRating from "../components/StarRating";
 
 const AllRooms = () => {
   const navigate = useNavigate();
+  const [openFilters, setOpenFilters] = useState(false);
 
   return (
     <div className="flex flex-col-reverse lg:flex-row items-start justify-between pt-28 md:pt-35 px-4 md:px-16 lg:px-24 xl:px-32">
@@ -55,28 +56,111 @@ const AllRooms = () => {
               {/* room amenities */}
               <div className="flex flex-wrap items-center mt-3 mb-4 gap-4">
                 {room.amenities.map((item, index) => (
-                  <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-[#F5F5FF]/70" key={index}>
+                  <div
+                    className="flex items-center gap-2 px-3 py-2 rounded-lg bg-[#F5F5FF]/70"
+                    key={index}
+                  >
                     <img
-                    className="w-5 h-5" 
-                    src={facilityIcons[item]}
-                     alt={item} />
-                    <p className="text-xs">
-                      {item}
-                    </p>
+                      className="w-5 h-5"
+                      src={facilityIcons[item]}
+                      alt={item}
+                    />
+                    <p className="text-xs">{item}</p>
                   </div>
                 ))}
               </div>
               {/* room price per night */}
-                <p className="text-xl font-medium text-gray-700">
-                  ${room.pricePerNight} /night
-                </p>
+              <p className="text-xl font-medium text-gray-700">
+                ${room.pricePerNight} /night
+              </p>
             </div>
           </div>
         ))}
       </div>
-
       {/* Right side || filters */}
-      <div></div>
+      <div className="bg-white w-80 border border-gray-300 text-gray-600 max-lg:mb-8 min-lg:mt-16">
+        {/* filter header */}
+        <div
+          className={`flex items-center justify-between px-5 py-2.5 min-lg:border-b border-gray-300 ${
+            openFilters && "border-b"
+          }`}
+        >
+          <p className="text-base font-medium text-gray-800">FILTERS</p>
+          <div className="text-xs cursor-pointer">
+            <span
+              onClick={() => setOpenFilters(!openFilters)}
+              className="lg:hidden"
+            >
+              {openFilters ? "HIDE" : "SHOW"}
+            </span>
+            <span className="hidden lg:block">CLEAR</span>
+          </div>
+        </div>
+
+        {/* filter options */}
+        <div
+          className={`${
+            openFilters ? "h-auto" : "h-0 lg:h-auto"
+          } overflow-hidden transition-all duration-300`}
+        >
+          <div className="px-5 pt-5">
+            <p className="font-medium text-gray-800 pb-2">Popular filters</p>
+            <lable className="flex gap-3 items-center cursor-pointer mt-2 text-sm">
+              <input type="checkbox" />
+              <span className="font-light select-none">Single Bed</span>
+            </lable>
+            <lable className="flex gap-3 items-center cursor-pointer mt-2 text-sm">
+              <input type="checkbox" />
+              <span className="font-light select-none">Double Bed</span>
+            </lable>
+            <lable className="flex gap-3 items-center cursor-pointer mt-2 text-sm">
+              <input type="checkbox" />
+              <span className="font-light select-none">Luxury Room</span>
+            </lable>
+            <lable className="flex gap-3 items-center cursor-pointer mt-2 text-sm">
+              <input type="checkbox" />
+              <span className="font-light select-none">Family Room</span>
+            </lable>
+          </div>
+          {/* price filter */}
+          <div className="px-5 pt-5">
+            <p className="font-medium text-gray-800 pb-2">Price Range</p>
+             <lable className="flex gap-3 items-center cursor-pointer mt-2 text-sm">
+              <input type="checkbox" />
+              <span className="font-light select-none">$ 0 to 500</span>
+            </lable>
+               <lable className="flex gap-3 items-center cursor-pointer mt-2 text-sm">
+              <input type="checkbox" />
+              <span className="font-light select-none">$ 500 to 1000</span>
+            </lable>
+               <lable className="flex gap-3 items-center cursor-pointer mt-2 text-sm">
+              <input type="checkbox" />
+              <span className="font-light select-none">$ 1000 to 2000</span>
+            </lable>
+               <lable className="flex gap-3 items-center cursor-pointer mt-2 text-sm">
+              <input type="checkbox" />
+              <span className="font-light select-none">$ 2000 to 3000</span>
+            </lable>
+          </div>
+          {/* low to high filters */}
+            <div className="px-5 pt-5">
+            <p className="font-medium text-gray-800 pb-2">Sort By</p>
+               <lable className="flex gap-3 items-center cursor-pointer mt-2 text-sm">
+              <input type="radio" name="sortOption" />
+              <span className="font-light select-none">Price Low to High</span>
+            </lable>
+               <lable className="flex gap-3 items-center cursor-pointer mt-2 text-sm">
+              <input type="radio" name="sortOption" />
+              <span className="font-light select-none">Price High to Low</span>
+            </lable>
+               <lable className="flex gap-3 items-center cursor-pointer mt-2 text-sm">
+              <input type="radio" name="sortOption" />
+              <span className="font-light select-none">Newest First</span>
+            </lable>
+          </div>
+
+        </div>
+      </div>
     </div>
   );
 };
