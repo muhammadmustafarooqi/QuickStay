@@ -5,6 +5,8 @@ import Home from "./pages/Home";
 import Footer from "./components/Footer";
 import AllRooms from "./pages/AllRooms";
 import RoomDetails from "./pages/RoomDetails";
+import About from "./pages/About";
+import Experience from "./pages/Experience";
 
 function App() {
 
@@ -17,6 +19,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/rooms" element={<AllRooms />} />
           <Route path="/rooms/:id" element={<RoomDetails />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/experience" element={<Experience />} />
           </Routes>
       </div>
       <Footer />

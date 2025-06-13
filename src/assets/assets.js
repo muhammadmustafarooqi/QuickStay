@@ -1,4 +1,5 @@
 import logo from './logo.svg'
+import aboutImg from './aboutImg.jpg'
 import searchIcon from './searchIcon.svg'
 import userIcon from './userIcon.svg'
 import calenderIcon from './calenderIcon.svg'
@@ -37,10 +38,19 @@ import listIcon from "./listIcon.svg";
 import uploadArea from "./uploadArea.svg";
 import totalBookingIcon from "./totalBookingIcon.svg";
 import totalRevenueIcon from "./totalRevenueIcon.svg";
+import member1 from './team1.jpg';
+import member2 from './team2.jpg';
+import member3 from './team3.jpg';
+import member4 from './team4.jpg';
 
 
 export const assets = {
+    member1,
+    member2,
+    member3,
+    member4,
     logo,
+    aboutImg,
     searchIcon,
     userIcon,
     calenderIcon,
