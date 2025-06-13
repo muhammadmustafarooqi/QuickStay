@@ -3,9 +3,59 @@ import assets, { facilityIcons, roomsDummyData } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
 import StarRating from "../components/StarRating";
 
+
+const Checkbox = ({lable, selected = false, onChange = () => { } }) => {
+  return (
+    <label className="flex gap-3 items-center cursor-pointer mt-2 text-sm">
+      <input
+        type="checkbox"
+        checked={selected}
+        onChange={(e) => onChange(e.target.checked , lable)}
+        className="cursor-pointer"
+      />
+      <span className="font-light select-none">{lable}</span>
+    </label>
+  ); 
+};
+const RadioButton = ({lable, selected = false, onChange = () => { } }) => {
+  return (
+    <label className="flex gap-3 items-center cursor-pointer mt-2 text-sm">
+      <input
+        type="radio"
+        name="sortOption"
+        checked={selected}
+        onChange={() => onChange(lable)}
+        className="cursor-pointer"
+      />
+      <span className="font-light select-none">{lable}</span>
+    </label>
+  ); 
+};
+
 const AllRooms = () => {
   const navigate = useNavigate();
   const [openFilters, setOpenFilters] = useState(false);
+  // const [selectedRooms, setSelectedRooms] = useState([]);
+  // const [selectedPriceRange, setSelectedPriceRange] = useState([]);
+  // const [selectedSortOption, setSelectedSortOption] = useState("");
+
+  const roomTypes = [
+    "Single Bed",
+    "Double Bed",
+    "Luxury Room",
+    "Family Room",
+  ];
+  const priceRanges = [
+    "$0 to $500",
+    "$500 to $1000",
+    "$1000 to $2000",
+    "$2000 to $3000",
+  ];
+  const sortOptions = [
+    "Price Low to High",
+    "Price High to Low",
+    "Newest First",
+  ];
 
   return (
     <div className="flex flex-col-reverse lg:flex-row items-start justify-between pt-28 md:pt-35 px-4 md:px-16 lg:px-24 xl:px-32">
@@ -105,60 +155,37 @@ const AllRooms = () => {
         >
           <div className="px-5 pt-5">
             <p className="font-medium text-gray-800 pb-2">Popular filters</p>
-            <lable className="flex gap-3 items-center cursor-pointer mt-2 text-sm">
-              <input type="checkbox" />
-              <span className="font-light select-none">Single Bed</span>
-            </lable>
-            <lable className="flex gap-3 items-center cursor-pointer mt-2 text-sm">
-              <input type="checkbox" />
-              <span className="font-light select-none">Double Bed</span>
-            </lable>
-            <lable className="flex gap-3 items-center cursor-pointer mt-2 text-sm">
-              <input type="checkbox" />
-              <span className="font-light select-none">Luxury Room</span>
-            </lable>
-            <lable className="flex gap-3 items-center cursor-pointer mt-2 text-sm">
-              <input type="checkbox" />
-              <span className="font-light select-none">Family Room</span>
-            </lable>
+             {roomTypes.map((room, index) => (
+              <Checkbox
+                key={index}
+                lable={room}
+              />
+              ))}
           </div>
           {/* price filter */}
-          <div className="px-5 pt-5">
+                    <div className="px-5 pt-5">
             <p className="font-medium text-gray-800 pb-2">Price Range</p>
-             <lable className="flex gap-3 items-center cursor-pointer mt-2 text-sm">
-              <input type="checkbox" />
-              <span className="font-light select-none">$ 0 to 500</span>
-            </lable>
-               <lable className="flex gap-3 items-center cursor-pointer mt-2 text-sm">
-              <input type="checkbox" />
-              <span className="font-light select-none">$ 500 to 1000</span>
-            </lable>
-               <lable className="flex gap-3 items-center cursor-pointer mt-2 text-sm">
-              <input type="checkbox" />
-              <span className="font-light select-none">$ 1000 to 2000</span>
-            </lable>
-               <lable className="flex gap-3 items-center cursor-pointer mt-2 text-sm">
-              <input type="checkbox" />
-              <span className="font-light select-none">$ 2000 to 3000</span>
-            </lable>
+             {priceRanges.map((Range, index) => (
+              <Checkbox
+                key={index}
+                lable={`$ ${Range}`}
+              />
+              ))}
           </div>
+       
           {/* low to high filters */}
-            <div className="px-5 pt-5">
-            <p className="font-medium text-gray-800 pb-2">Sort By</p>
-               <lable className="flex gap-3 items-center cursor-pointer mt-2 text-sm">
-              <input type="radio" name="sortOption" />
-              <span className="font-light select-none">Price Low to High</span>
-            </lable>
-               <lable className="flex gap-3 items-center cursor-pointer mt-2 text-sm">
-              <input type="radio" name="sortOption" />
-              <span className="font-light select-none">Price High to Low</span>
-            </lable>
-               <lable className="flex gap-3 items-center cursor-pointer mt-2 text-sm">
-              <input type="radio" name="sortOption" />
-              <span className="font-light select-none">Newest First</span>
-            </lable>
+               <div className="px-5 pt-5 pb-7">
+            <p className="font-medium text-gray-800 pb-2">
+              Sort By
+            </p>
+             {sortOptions.map((option, index) => (
+              <RadioButton
+                key={index}
+                lable={option}
+              />
+              ))}
           </div>
-
+       
         </div>
       </div>
     </div>
