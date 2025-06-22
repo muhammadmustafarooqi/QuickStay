@@ -141,7 +141,7 @@ const AddRoom = () => {
         {/* Submit Button */}
         <button
           type="submit"
-          className="bg-blue-500 text-white px-8 py-2 rounded mt-8 cursor-pointer hover:bg-blue-600 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="bg-blue-500 text-white px-8 py-2 rounded mt-4 cursor-pointer hover:bg-blue-600 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           Add Room
         </button>
