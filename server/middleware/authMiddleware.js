@@ -1,5 +1,5 @@
 import { authenticateRequest } from "@clerk/express";
-import User from "../models/User";
+import User from "../models/User.js";
 import { messageInRaw } from "svix";
 
 // middleware to check if user is authenticated

@@ -32,22 +32,22 @@
 // });
 
 
-
-
-
-
-
-
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import connectDB from './configs/db.js';
 import { clerkMiddleware } from '@clerk/express';
 import ClerkWebhooks from './controllers/clerkWebhooks.js';
+import userRouter from './routes/userRoutes.js';
+import hotelRouter from './routes/hotelRoute.js';
+import connectCloudinary from './configs/cloudinary.js';
+import roomRouter from './routes/roomRoutes.js';
+import bookingRouter from './routes/bookingRoute.js';
 
 dotenv.config(); // Load .env variables
 
 connectDB(); // Connect to MongoDB
+connectCloudinary(); // connect to cloudinary
 
 const app = express();
 app.use(cors());
@@ -67,6 +67,10 @@ app.get('/api/clerk', (req, res) => {
 app.get('/', (req, res) => {
   res.status(200).send('API Is Working!');
 });
+app.use('/api/user' , userRouter)
+app.use('/api/hotels' , hotelRouter)
+app.use('/api/rooms' , roomRouter)
+app.use('/api/bookings' , bookingRouter)
 
 // Start server
 const PORT = process.env.PORT || 5000;
