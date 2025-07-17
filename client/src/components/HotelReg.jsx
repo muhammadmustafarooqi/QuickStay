@@ -1,10 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import assets, { cities } from "../assets/assets";
+import { useAppContext } from "../context/appContext";
 
 const HotelReg = () => {
+  const { setShowHotelReg, axios, getToken, setIsOwner } = useAppContext();
+
+  const [name, setName] = useState("");
+  const [address, setAddress] = useState("");
+  const [contact, setContact] = useState("");
+  const [city, setCity] = useState("");
+
+  // const onSubmitHandler = async (event) => {
+  //   try {
+  //     event.preventDefault();
+  //     const {data} = await axios.post(
+  //       "/hotel/register",
+
+  //   } catch (error) {
+      
+  //   }
+  // }
   return (
-    <div className="fixed top-0 left-0 right-0 bottom-0 z-100 flex items-center justify-center  bg-black/70">
-      <form className="flex bg-white rounded-xl max-w-4xl max-md:mx-2">
+    <div onClick={() => setShowHotelReg(false)} 
+    className="fixed top-0 left-0 right-0 bottom-0 z-100 flex items-center justify-center  bg-black/70">
+      <form 
+       onSubmit={onSubmitHandler}
+       onClick={(e)=> e.stopPropagation()}
+       className="flex bg-white rounded-xl max-w-4xl max-md:mx-2">
         <img
           src={assets.regImage}
           alt="Hotel Registration Image"
@@ -13,6 +35,7 @@ const HotelReg = () => {
 
         <div className="relative flex flex-col items-center p-8 md:p-10 md:w-1/2">
           <img
+            onClick={() => setShowHotelReg(false)}
             src={assets.closeIcon}
             alt="Close Icon"
             className="absolute top-4 right-4 w-4 h-4 cursor-pointer"
@@ -26,6 +49,8 @@ const HotelReg = () => {
               Hotel Name
             </label>
             <input
+              onChange={(e) => setName(e.target.value)}
+              value={name}
               type="text"
               id="name"
               placeholder="Enter your hotel name"
@@ -39,6 +64,8 @@ const HotelReg = () => {
               Phone
             </label>
             <input
+              onChange={(e) => setContact(e.target.value)}
+              value={contact}
               type="text"
               id="contact"
               placeholder="Enter your phone number"
@@ -52,6 +79,8 @@ const HotelReg = () => {
               Address
             </label>
             <input
+              onChange={(e) => setAddress(e.target.value)}
+              value={address}
               type="text"
               id="address"
               placeholder="Enter your address"
@@ -65,6 +94,8 @@ const HotelReg = () => {
               City
             </label>
             <select
+              onChange={(e) => setCity(e.target.value)}
+              value={city}
               id="city"
               className="border border-gray-200 rounded w-full px-3 py-2.5 mt-1 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               required
